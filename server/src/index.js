@@ -13,7 +13,7 @@ const PORT = process.env.PORT;
 app.use(
 	cors({
 		origin: [
-			"http://quicktalk-thaibapratik.netlify.app",
+			"https://quicktalk-thaibapratik.netlify.app",
 			"http://localhost:5173",
 		],
 		methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],

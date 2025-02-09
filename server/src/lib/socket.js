@@ -9,7 +9,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
 	cors: {
 		origin: [
-			"http://quicktalk-thaibapratik.netlify.app",
+			"https://quicktalk-thaibapratik.netlify.app/",
 			"http://localhost:5173",
 		],
 		methods: ["GET", "POST"],
