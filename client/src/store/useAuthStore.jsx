@@ -6,6 +6,9 @@ import { useChatStore } from "./useChatStore";
 
 const BASE_URL = "https://quick-talk-6e57.onrender.com";
 
+// Configure axios defaults
+axios.defaults.withCredentials = true;
+
 export const useAuthStore = create((set, get) => ({
 	authUser: null,
 	isCheckingAuth: true,
@@ -126,14 +129,25 @@ export const useAuthStore = create((set, get) => ({
 		const { authUser } = get();
 
 		if (!authUser || get().socket?.connected) return;
+
 		const socket = io(BASE_URL, {
 			query: {
 				userId: authUser._id,
 			},
+			withCredentials: true,
+			transports: ["websocket", "polling"],
+			reconnection: true,
+			reconnectionAttempts: 5,
+			reconnectionDelay: 1000,
 		});
 
 		socket.connect();
 		set({ socket: socket });
+
+		socket.on("connect_error", (error) => {
+			console.log("Socket connection error:", error);
+			toast.error("Connection error. Retrying...");
+		});
 
 		socket.on("getOnlineUsers", (userIds) => {
 			set({ onlineUsers: userIds });

@@ -8,8 +8,16 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
 	cors: {
-		origin: ["http://quicktalk-thaibapratik.netlify.app"],
+		origin: [
+			"http://quicktalk-thaibapratik.netlify.app",
+			"http://localhost:5173",
+		],
+		methods: ["GET", "POST"],
+		credentials: true,
+		allowedHeaders: ["Content-Type", "Authorization"],
 	},
+	transports: ["websocket", "polling"],
+	pingTimeout: 60000,
 });
 
 export const getReceiverSocketId = (userId) => {

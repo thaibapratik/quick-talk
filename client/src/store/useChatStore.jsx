@@ -3,6 +3,8 @@ import toast from "react-hot-toast";
 import { create } from "zustand";
 import { useAuthStore } from "./useAuthStore";
 
+const BASE_URL = "https://quick-talk-6e57.onrender.com";
+
 export const useChatStore = create((set, get) => ({
 	messages: [],
 	users: [],
@@ -15,18 +17,21 @@ export const useChatStore = create((set, get) => ({
 		try {
 			const token = localStorage.getItem("jwt");
 			const { data } = await axios.get(
-				"https://quick-talk-6e57.onrender.com/api/messages/users/",
+				`${BASE_URL}/api/messages/users/`,
 				{
 					headers: {
 						Authorization: token,
 					},
+					withCredentials: true,
 				}
 			);
 
 			set({ users: data.users });
 		} catch (error) {
 			console.log(error);
-			toast.error(error.response.data.message);
+			toast.error(
+				error.response?.data?.message || "Failed to fetch users"
+			);
 		} finally {
 			set({ isUsersLoading: false });
 		}

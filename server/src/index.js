@@ -10,14 +10,20 @@ import { app, server } from "./lib/socket.js";
 
 const PORT = process.env.PORT;
 
-app.use(express.json({ limit: "10mb" }));
-app.use(cookieParser());
 app.use(
 	cors({
-		origin: "http://quicktalk-thaibapratik.netlify.app",
+		origin: [
+			"http://quicktalk-thaibapratik.netlify.app",
+			"http://localhost:5173",
+		],
+		methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+		allowedHeaders: ["Content-Type", "Authorization"],
 		credentials: true,
 	})
 );
+
+app.use(express.json({ limit: "10mb" }));
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
 	res.json({ message: "hello" });
