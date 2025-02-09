@@ -8,7 +8,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
 	cors: {
-		origin: ["quicktalk-thaibapratik.netlify.app"],
+		origin: ["http://quicktalk-thaibapratik.netlify.app"],
 	},
 });
 
