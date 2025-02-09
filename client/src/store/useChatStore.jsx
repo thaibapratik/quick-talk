@@ -15,7 +15,7 @@ export const useChatStore = create((set, get) => ({
 		try {
 			const token = localStorage.getItem("jwt");
 			const { data } = await axios.get(
-				"http://localhost:4000/api/messages/users/",
+				"https://quick-talk-6e57.onrender.com/api/messages/users/",
 				{
 					headers: {
 						Authorization: token,
@@ -37,7 +37,7 @@ export const useChatStore = create((set, get) => ({
 		try {
 			const token = localStorage.getItem("jwt");
 			const { data } = await axios.get(
-				`http://localhost:4000/api/messages/chat/${userId}`,
+				`https://quick-talk-6e57.onrender.com/api/messages/chat/${userId}`,
 				{
 					headers: {
 						Authorization: token,
@@ -63,7 +63,7 @@ export const useChatStore = create((set, get) => ({
 			const token = localStorage.getItem("jwt");
 
 			const { data } = await axios.post(
-				`http://localhost:4000/api/messages/chat/${selectedUser._id}`,
+				`https://quick-talk-6e57.onrender.com/api/messages/chat/${selectedUser._id}`,
 				messageData,
 				{
 					headers: {

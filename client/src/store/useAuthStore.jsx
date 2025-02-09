@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 import { useChatStore } from "./useChatStore";
 
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "https://quick-talk-6e57.onrender.com";
 
 export const useAuthStore = create((set, get) => ({
 	authUser: null,
